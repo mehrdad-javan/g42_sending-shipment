@@ -1,26 +1,29 @@
 package se.lexicon.model;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class Receiver extends Person {
-  private final String id;
+  private int id;
   private String customerType;
   private String mobileNumber;
 
   public Receiver() {
-    this.id = UUID.randomUUID().toString();
+
   }
 
   public Receiver(String firstName, String lastName, String address, String postalCode, String city, String email, String customerType, String mobileNumber) {
     super(firstName, lastName, address, postalCode, city, email);
-    this.id = UUID.randomUUID().toString();
     setCustomerType(customerType);
     setMobileNumber(mobileNumber);
   }
 
-  public String getId() {
+
+  public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getCustomerType() {
@@ -52,7 +55,7 @@ public class Receiver extends Person {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Receiver receiver = (Receiver) o;
-    return Objects.equals(id, receiver.id) && Objects.equals(customerType, receiver.customerType) && Objects.equals(mobileNumber, receiver.mobileNumber);
+    return id == receiver.id && Objects.equals(customerType, receiver.customerType) && Objects.equals(mobileNumber, receiver.mobileNumber);
   }
 
   @Override
@@ -68,4 +71,5 @@ public class Receiver extends Person {
             ", mobileNumber='" + mobileNumber + '\'' +
             '}';
   }
+
 }

@@ -1,24 +1,26 @@
 package se.lexicon.model;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class Sender extends Person {
 
-  private final String id;
+  private int id;
   private Box box;
 
-  public Sender() {
-    this.id = UUID.randomUUID().toString();
+  public Sender(){
   }
 
   public Sender(String firstName, String lastName, String address, String postalCode, String city, String email) {
     super(firstName, lastName, address, postalCode, city, email);
-    this.id = UUID.randomUUID().toString();
   }
 
-  public String getId() {
+
+  public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public Box getBox() {
@@ -39,7 +41,7 @@ public class Sender extends Person {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Sender sender = (Sender) o;
-    return Objects.equals(id, sender.id) && Objects.equals(box, sender.box);
+    return id == sender.id && Objects.equals(box, sender.box);
   }
 
   @Override

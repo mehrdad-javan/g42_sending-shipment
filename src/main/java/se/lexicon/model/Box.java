@@ -10,7 +10,7 @@ public class Box {
   public static final double COUNTRY_FEE = 200;
   public static final double COUNTRY_FEE_SE = 0;
 
-  private final String id;
+  private int id;
   private BoxType type;
   private String country;
   private DeliveryOption deliveryOption;
@@ -20,7 +20,6 @@ public class Box {
   private final LocalDate date;
 
   public Box() {
-    this.id = UUID.randomUUID().toString();
     this.date = LocalDate.now();
   }
 
@@ -43,8 +42,12 @@ public class Box {
     this.price = total;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public BoxType getType() {
@@ -103,12 +106,13 @@ public class Box {
     return date;
   }
 
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Box box = (Box) o;
-    return Double.compare(box.price, price) == 0 && status == box.status && Objects.equals(id, box.id) && type == box.type && Objects.equals(country, box.country) && deliveryOption == box.deliveryOption && Objects.equals(receiver, box.receiver) && Objects.equals(date, box.date);
+    return id == box.id && Double.compare(box.price, price) == 0 && status == box.status && type == box.type && Objects.equals(country, box.country) && deliveryOption == box.deliveryOption && Objects.equals(receiver, box.receiver) && Objects.equals(date, box.date);
   }
 
   @Override
