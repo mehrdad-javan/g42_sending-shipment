@@ -11,12 +11,12 @@ public class App {
   public static void main(String[] args) {
     ReceiverDAO receiverDAO = new ReceiverDAOImpl();
     Receiver testDataForReceiver = new Receiver(
-            "test2",
-            "test2",
+            "test4",
+            "test4",
             "test address",
             "12345",
             "Växjö",
-            "test.test2@test.se",
+            "test.test4@test.se",
             "private",
             "1234567890"
     );

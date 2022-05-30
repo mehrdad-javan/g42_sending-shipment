@@ -6,9 +6,7 @@ import se.lexicon.exception.DBConnectionException;
 import se.lexicon.exception.ObjectNotFoundException;
 import se.lexicon.model.Receiver;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +18,10 @@ public class ReceiverDAOImpl implements ReceiverDAO {
     String insertQuery = "insert into receiver (first_name, last_name, address, postal_code, city, email, customer_type, mobile_number) values (?,?,?,?,?,?,?,?)";
     Connection connection = null;
     PreparedStatement preparedStatement = null;
+    ResultSet keySet = null;
     try {
       connection = MySQLConnection.getMySqlConnection();
-      preparedStatement = connection.prepareStatement(insertQuery);
+      preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
 
       preparedStatement.setString(1, receiver.getFirstName());
       preparedStatement.setString(2, receiver.getLastName());
@@ -34,8 +33,12 @@ public class ReceiverDAOImpl implements ReceiverDAO {
       preparedStatement.setString(8, receiver.getMobileNumber());
       // execute query
       preparedStatement.executeUpdate();
+      keySet = preparedStatement.getGeneratedKeys();
       System.out.println("insert operation is done successfully");
-
+      if(keySet.next()){
+        int generatedId = keySet.getInt(1);
+        receiver.setId(generatedId);
+      }
     } catch (SQLException e) {
       System.out.println("SQL Exception : " + e.getMessage());
     } catch (DBConnectionException e) {
