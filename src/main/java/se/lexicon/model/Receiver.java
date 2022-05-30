@@ -17,6 +17,12 @@ public class Receiver extends Person {
     setMobileNumber(mobileNumber);
   }
 
+  public Receiver(String firstName, String lastName, String address, String postalCode, String city, String email, int id, String customerType, String mobileNumber) {
+    super(firstName, lastName, address, postalCode, city, email);
+    this.id = id;
+    this.customerType = customerType;
+    this.mobileNumber = mobileNumber;
+  }
 
   public int getId() {
     return id;
