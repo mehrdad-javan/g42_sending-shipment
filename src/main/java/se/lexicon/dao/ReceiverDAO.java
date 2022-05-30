@@ -10,11 +10,13 @@ public interface ReceiverDAO {
 
   Receiver create(Receiver receiver);
 
-  Optional<Receiver> findById(String id);
+  Optional<Receiver> findById(int id);
 
   List<Receiver> findByFirstName(String firstName);
 
   List<Receiver> findAll();
 
-  void remove(String id) throws ObjectNotFoundException;
+  int remove(int id) throws ObjectNotFoundException;
+
+  int update(Receiver receiver) throws ObjectNotFoundException;
 }

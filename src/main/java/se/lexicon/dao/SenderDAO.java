@@ -10,11 +10,13 @@ public interface SenderDAO {
 
   Sender create(Sender sender);
 
-  Optional<Sender> findById(String id);
+  Optional<Sender> findById(int id);
 
   List<Sender> findByFirstName(String firstName);
 
   List<Sender> findAll();
 
-  void remove(String id) throws ObjectNotFoundException;
+  int remove(int id) throws ObjectNotFoundException;
+
+  int update(Sender sender) throws ObjectNotFoundException;
 }
